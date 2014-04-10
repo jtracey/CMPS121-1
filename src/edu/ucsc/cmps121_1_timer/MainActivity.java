@@ -4,29 +4,39 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
-
+	
+	private long counter;
+	private CountDownTimer timer;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        counter = 0;
+        timer = null;
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
         // Prevents the screen from dimming and going to sleep.
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
+    
+	@Override
+	protected void onResume() {
+		super.onResume();
+		counter = 0;
+		timer = null;		
+	}
 
 
     @Override
@@ -48,21 +58,34 @@ public class MainActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-    }
+    
+	public void clickStart(View v) {
+		
+	}
+	
+	public void clickPlus(View v) {
+		counter += 60 * 1000;
+		displayCount();
+	}
+	
+	public void clickMinus(View v) {
+		counter -= 60 * 1000;
+		counter = Math.max(0, counter);	
+		displayCount();
+	}
+	
+	public void clickReset(View v) {
+		counter = 0;
+		timer = null;
+		displayCount();
+	}
+	
+	private void displayCount() {
+		TextView timetext = (TextView) findViewById(R.id.textView1);
+		long seconds = (counter/1000)%60;
+		long minutes = counter/(60*1000);
+		// A little string formatting magic to keep leading 0 in seconds <10
+		timetext.setText(String.format("%d:%02d", minutes, seconds));
+	}
 
 }

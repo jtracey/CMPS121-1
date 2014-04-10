@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
+        android:onClick="clickStart"
         android:text="@string/startstop" />
 
     <Button
@@ -30,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
+        android:onClick="clickReset"
         android:text="@string/reset" />
 
     <Button
@@ -38,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_toLeftOf="@+id/textView1"
+        android:onClick="clickMinus"
         android:text="@string/minusone" />
 
     <Button
@@ -47,6 +50,7 @@
         android:layout_alignBaseline="@+id/button2"
         android:layout_alignBottom="@+id/button2"
         android:layout_toRightOf="@+id/textView1"
+        android:onClick="clickPlus"
         android:text="@string/plusone" />
 
 </RelativeLayout>
