@@ -1,18 +1,13 @@
 package edu.ucsc.cmps121_1_timer;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -60,23 +55,37 @@ public class MainActivity extends ActionBarActivity {
     }
     
 	public void clickStart(View v) {
-		startCounter();
+		if (timer == null)
+			startCounter();
+		else {
+			timer.cancel();
+			timer = null;
+		}
 	}
 	
 	public void clickPlus(View v) {
 		counter += 60 * 1000;
-		displayCount();
+		if (timer == null)
+			displayCount();
+		else startCounter();
 	}
 	
 	public void clickMinus(View v) {
 		counter -= 60 * 1000;
-		counter = Math.max(0, counter);	
-		displayCount();
+		counter = Math.max(0, counter);
+		if (timer == null)
+			displayCount();
+		else if (counter == 0)
+			timer.onFinish();
+		else startCounter();
 	}
 	
 	public void clickReset(View v) {
 		counter = 0;
-		timer = null;
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
 		displayCount();
 	}
 	
@@ -88,13 +97,17 @@ private void startCounter() {
     displayCount();
     if (counter > 0) {
         timer = new CountDownTimer(counter, 1000) {
-                public void onTick(long remainingTimeMillis) {
+                @Override
+				public void onTick(long remainingTimeMillis) {
                     counter = remainingTimeMillis;
                     displayCount();
                 }
-                public void onFinish() {
+                @Override
+				public void onFinish() {
                     counter = 0;
                     displayCount();
+                    this.cancel();
+                    timer=null;
                 }
             };
         timer.start();
