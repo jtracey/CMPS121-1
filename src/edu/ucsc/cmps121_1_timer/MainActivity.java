@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
     }
     
 	public void clickStart(View v) {
-		
+		startCounter();
 	}
 	
 	public void clickPlus(View v) {
@@ -80,6 +80,28 @@ public class MainActivity extends ActionBarActivity {
 		displayCount();
 	}
 	
+
+private void startCounter() {
+    if (timer != null) {
+        timer.cancel();
+    }
+    displayCount();
+    if (counter > 0) {
+        timer = new CountDownTimer(counter, 1000) {
+                public void onTick(long remainingTimeMillis) {
+                    counter = remainingTimeMillis;
+                    displayCount();
+                }
+                public void onFinish() {
+                    counter = 0;
+                    displayCount();
+                }
+            };
+        timer.start();
+    }
+}
+
+
 	private void displayCount() {
 		TextView timetext = (TextView) findViewById(R.id.textView1);
 		long seconds = (counter/1000)%60;
