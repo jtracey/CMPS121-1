@@ -129,6 +129,8 @@ public class MainActivity extends ActionBarActivity {
 	                @Override
 					public void onFinish() {
 	                    clearTimer();
+	                    if (beep == null)
+	                    	beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
 	                    beep.seekTo(0);
 	                    beep.start();
 	                }
