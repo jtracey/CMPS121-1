@@ -250,10 +250,10 @@ int id action_settings 0x7f060042
 int id activity_chooser_view_content 0x7f060025
 int id always 0x7f06000b
 int id beginning 0x7f060011
-int id button1 0x7f06003f
-int id button2 0x7f060041
+int id button1 0x7f060041
+int id button2 0x7f06003f
 int id button3 0x7f06003e
-int id button4 0x7f060040
+int id button4 0x7f06003d
 int id checkbox 0x7f06002d
 int id collapseActionView 0x7f06000d
 int id container 0x7f06003c
@@ -296,7 +296,7 @@ int id showTitle 0x7f060006
 int id split_action_bar 0x7f06001e
 int id submit_area 0x7f060039
 int id tabMode 0x7f060002
-int id textView1 0x7f06003d
+int id textView1 0x7f060040
 int id title 0x7f06002b
 int id top_action_bar 0x7f060020
 int id up 0x7f060021
@@ -328,8 +328,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_main 0x7f030018
-int layout fragment_main 0x7f030019
-int layout support_simple_spinner_dropdown_item 0x7f03001a
+int layout support_simple_spinner_dropdown_item 0x7f030019
 int menu main 0x7f0d0000
 int raw alarmclock_mechanical_trim 0x7f050000
 int string abc_action_bar_home_description 0x7f0b0001

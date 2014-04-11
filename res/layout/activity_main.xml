@@ -5,26 +5,7 @@
     android:layout_height="match_parent"
     tools:context="edu.ucsc.cmps121_1_timer.MainActivity"
     tools:ignore="MergeRootFrame" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
-        android:text="@string/timezero"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
-        android:layout_centerHorizontal="true"
-        android:onClick="clickStart"
-        android:text="@string/startstop" />
-
+    
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
@@ -52,5 +33,23 @@
         android:layout_toRightOf="@+id/textView1"
         android:onClick="clickPlus"
         android:text="@string/plusone" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:onClick="clickStart"
+        android:text="@string/startstop" />
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/timezero"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
