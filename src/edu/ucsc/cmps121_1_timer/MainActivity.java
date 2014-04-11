@@ -31,8 +31,6 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		counter = 0;
-		timer = null;
 		beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
 	}
 
