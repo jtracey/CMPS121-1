@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
 	private long counter;
 	private CountDownTimer timer;
 	private MediaPlayer beep;
+	private Boolean mpavail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,8 @@ public class MainActivity extends ActionBarActivity {
         counter = 0;
         timer = null;
         beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
-
+        mpavail = true;
+        
         // Prevents the screen from dimming and going to sleep.
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
@@ -31,7 +34,9 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
+		if (!mpavail)
+			beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
+		mpavail = true;
 	}
 
 
@@ -58,12 +63,14 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onPause() {
     	beep.release();
+    	mpavail = false;
     	super.onPause();
     }
     
     @Override
     public void onStop() {
     	beep.release();
+    	mpavail = false;
     	super.onStop();
     }
 
@@ -129,8 +136,11 @@ public class MainActivity extends ActionBarActivity {
 	                @Override
 					public void onFinish() {
 	                    clearTimer();
-	                    if (beep == null)
+	                    if (!mpavail) {
+	                    	Log.d("test", "Beep is null");
 	                    	beep = MediaPlayer.create(getApplicationContext(), R.raw.alarmclock_mechanical_trim);
+	                    	mpavail = true;
+	                    }
 	                    beep.seekTo(0);
 	                    beep.start();
 	                }
